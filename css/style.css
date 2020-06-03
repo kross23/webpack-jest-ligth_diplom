@@ -1,0 +1,19 @@
+main .timer-numbers {
+    font-size: 6rem
+}
+.time {
+ display: flex;
+ max-height: 300px;
+}
+.timer-numbers{
+font-size: 200px;
+}
+#timer-hours{
+
+}
+#timer-minutes{
+
+}
+#timer-seconds{
+
+}
