@@ -6,10 +6,9 @@ import 'nodelist-foreach-polyfill';
 import 'formdata-polyfill';
 import 'es6-promise';
 import 'fetch-polyfill';
-
-import consolelog from './modules/consolelog';
-import countTimer from './modules/countTimer';
+import popupCall from './modules/popupCall';
+import active from './modules/active';
 import elementClosest from 'element-closest';
 elementClosest(window);
-consolelog();
-countTimer('14 jun 2020');
+active();
+popupCall();
