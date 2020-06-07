@@ -31,29 +31,16 @@ const sendForm = () => {
 			const phone = item.querySelector('input[name = "user_phone"]'),
 				message = item.querySelector('input[name = "user_message"]'),
 				name = item.querySelector('input[name = "user_name"]'),
-				formBtn = item.querySelector('.form-btn');
-
-			const onBtn = () => {
-				formBtn.removeAttribute('disabled');
-			};
-			const offBtn = () => {
-				formBtn.setAttribute('disabled', true);
-			};
+				formBtn = item.querySelector('.capture-form-btn');
 
 			if (event.target === name) {
 				name.value = name.value.replace(/([^А-Яа-яЁё])*/g, '');
 			}
-			if (event.target === phone && !phone.value.match(/(\+|\d){1}(\d){8,20}(?![A-Za-zА-Яа-яЁё])/g)) {
-				item.appendChild(statusMesage);
-				statusMesage.style.color = 'red';
-				statusMesage.textContent = 'Номер должен быть не менее 8 цифр';
-				offBtn();
-			} else if (phone.value.match(/(\+|\d){1}(\d){8,20}(?![A-Za-zА-Яа-яЁё])/g)) {
-				phone.value = phone.value.trim().replace(/^[A-Za-zА-Яа-яЁё]$/g, '');
-				statusMesage.style.color = '#fff';
-				statusMesage.textContent = '';
-				onBtn();
+			if (event.target === phone) {
+				phone.value = phone.value.replace(/([^0-9])*/g, '');
+
 			}
+
 			if (event.target === message) {
 				message.value = message.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
 			}

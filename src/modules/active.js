@@ -2,9 +2,12 @@
 const active = () => {
 	const style = document.createElement('style');
 	style.textContent = `
-        .popup-active{
-        display: block;
+        .active{
+        display: block ;
         }
+        .none{
+                display: none ;
+                }
         `;
 	document.head.appendChild(style);
 
