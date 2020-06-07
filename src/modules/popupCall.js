@@ -63,7 +63,36 @@ const popupCall = () => {
 	};
 
 	checkList();
+	const popupConsultation = () => {
+		const consultationBtn = document.querySelector('.consultation-btn'),
+			popupConsultation = document.querySelector('.popup-consultation'),
+			nameUserquest = document.querySelector('input[name="user_quest"]');
+
+		nameUserquest.addEventListener('input', event => {
+			const target = event.target;
+			if (target === nameUserquest) {
+				target.value = target.value.replace(/([^А-Яа-яЁё])*/g, '');
+			}
+		});
 
 
+		consultationBtn.addEventListener('click', event => {
+			const target = event.target;
+			popupConsultation.classList.add('active');
+		});
+		popupConsultation.addEventListener('click', event => {
+			let target = event.target;
+			if (target.classList.contains('popup-close')) {
+				popupConsultation.classList.remove('active');
+			} else {
+				target = target.closest('.popup-content');
+			}
+			if (!target) {
+				popupConsultation.classList.remove('active');
+			}
+		});
+
+	};
+	popupConsultation();
 };
 export default popupCall;

@@ -6,7 +6,7 @@ const active = () => {
         display: block ;
         }
         .none{
-                display: none ;
+        display: none ;
                 }
         `;
 	document.head.appendChild(style);
