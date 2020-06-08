@@ -102,13 +102,19 @@ const constructor = () => {
 		const get = target.closest('.panel-heading'); // панель верняя
 		const btn = target.closest('.construct-btn'); // ктопка
 		const check = document.querySelector('#myonoffswitch');
-
+		const checked = target.closest('.onoffswitch');
 		const checkTwo = target.closest('#myonoffswitch-two');
 		const callBtn = target.closest('.call-btn');
-
+		const select = target.closest('.form-control');
 
 		//class="button construct-btn"
+		if (checked !== null || select !== null) {
+			console.log('target checced ', target);
+			calck();
+		}
+
 		if (get !== null) { //
+
 			if (check.checked) {
 				typeSept = true;
 				blocNon();
@@ -116,6 +122,7 @@ const constructor = () => {
 				typeSept = false;
 				blocIn();
 			}
+			calck();
 			panel.forEach((elem, index) => {
 				if (elem === get) {
 					toglgleTabs(index);
@@ -130,7 +137,6 @@ const constructor = () => {
 				typeSept = false;
 				blocIn();
 			}
-
 			calck();
 			ntbb.forEach((elem, index) => {
 				if (elem === btn) {
@@ -141,19 +147,16 @@ const constructor = () => {
 				}
 			});
 		}
-
-
 		if (checkTwo !== null) {
+			calck();
 			if (checkTwo.checked) {
 				typeSeptTwo = true;
-
 			} else {
 				typeSeptTwo = false;
-
 			}
 		}
-		if (callBtn !== null) {
 
+		if (callBtn !== null) {
 			setTimeout(popupDiscount.classList.add('active'), 3000);
 		}
 	});

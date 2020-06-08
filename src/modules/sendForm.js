@@ -37,36 +37,38 @@ const sendForm = () => {
 	const clear = () => {
 		// eslint-disable-next-line no-unused-vars
 		const allInput = document.querySelectorAll('input').forEach(el => el.value = '');
-		const pop = document.querySelector('.popup');
-		if (pop.style.display !== 'none') {
-			pop.style.display = 'none';
-		}
+		const pop = document.querySelectorAll('.popup');
+		pop.forEach(elem => {
+			if (elem.classList.contains('active')) {
+				elem.classList.remove('active');
+			}
+		});
+
 		statusMesage.textContent = empty;
 	};
 
 	forms.forEach((item, index) => {
 		item.addEventListener('input', event => {
-			const phone = item.querySelector('input[name = "user_phone"]'),
-				message = item.querySelector('input[name = "user_message"]'),
-				name = item.querySelector('input[name = "user_name"]'),
-				userq = item.querySelector('input[name="user_quest"]');
+			if (item.classList.contains('active')) {
+				const phone = item.querySelector('input[name = "phone-user"]'),
+					name = item.querySelector('input[name = "user_name"]'),
+					userq = item.querySelector('input[name="user_quest"]');
 
-			if (event.target === name) {
-				name.value = name.value.replace(/([^А-Яа-яЁё])*/g, '');
-			}
-			if (event.target === phone) {
-				phone.value = phone.value.replace(/([^0-9])*/g, '');
+				if (event.target === name) {
+					name.value = name.value.replace(/([^А-Яа-яЁё])*/g, '');
+				}
+				if (event.target === phone) {
+					phone.value = phone.value.replace(/[^\D]*/g, '');
+
+				}
+
+				if (event.target === userq) {
+					userq.value = userq.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
+
+				}
+				
 
 			}
-
-			if (event.target === message) {
-				message.value = message.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
-			}
-			if (event.target === userq) {
-				userq.value = userq.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
-
-			}
-			userQuest.quest = userq.value;
 
 		});
 
@@ -107,7 +109,7 @@ const sendForm = () => {
 					dataSept.firstWell.rings = select[1].value;
 					dataSept.underside = myonoffswitchTwo.checked; //днище
 					dataSept.distanc = input.value,
-					dataSept.summa = calcResult.value;
+						dataSept.summa = calcResult.value;
 
 				} else {
 					dataSept.septicType = 2;
@@ -118,7 +120,7 @@ const sendForm = () => {
 					dataSept.secondWellDrainage.rings = select[3].value;
 					dataSept.underside = myonoffswitchTwo.checked; //днище
 					dataSept.distanc = input.value,
-					dataSept.summa = calcResult.value;
+						dataSept.summa = calcResult.value;
 				}
 
 
@@ -153,6 +155,7 @@ const sendForm = () => {
 				const formData = new FormData(item);
 				const body = {};
 				formData.forEach((val, key) => body[key] = val);
+				userQuest.quest = users.value;
 				console.log('userQuest: ', userQuest);
 				body.qwest = userQuest;
 				console.log('body: ', body);
