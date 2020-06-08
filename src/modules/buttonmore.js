@@ -7,7 +7,7 @@ const buttonmore = () => {
 	const visiblBlock = () => {
 		hiddenAll[0].classList.remove('hidden');
 		hiddenAll[1].classList.remove('hidden');
-        visibleSmBlock.classList.remove('visible-sm-block');
+		visibleSmBlock.classList.remove('visible-sm-block');
 	};
 
 

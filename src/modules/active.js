@@ -4,6 +4,9 @@ const active = () => {
 	style.textContent = `
         .active{
         display: block ;
+        }
+        .none{
+        display: none ;
         }`;
 	document.head.appendChild(style);
 

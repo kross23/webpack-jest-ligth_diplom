@@ -15,6 +15,7 @@ const constructor = () => {
 		typeSeptTwo = true,
 		sum = 0;
 
+
 	//........................................................
 	panelCollapse[0].classList.remove('in');
 
@@ -25,49 +26,41 @@ const constructor = () => {
 
 		if (typeSept) {
 			sum = 10000;
-			select.forEach((elem, index) => {
-				if (index === 0 && 2 === parseFloat(elem.value)) {
-					console.log('sum: ', sum);
-					sum = ((sum / 100) * 20) + sum;
-					sum = Math.floor(sum);
-					console.log('sum: ', sum);
-				}
-				if (index === 1 && 2 === parseFloat(elem.value)) {
-					sum = ((sum / 100) * 30) + sum;
-				} else if (index === 1 && 3 === parseFloat(elem.value)) {
-					sum = ((sum / 100) * 50) + sum;
-				}
+			if (parseFloat(select[0].value) === 2) {
+				sum = ((sum / 100) * 20) + sum;
+				sum = Math.floor(sum);
+			}
+			if (parseFloat(select[1].value) === 2) {
+				sum = ((sum / 100) * 30) + sum;
+			} else if (parseFloat(select[1].value) === 3) {
+				sum = ((sum / 100) * 50) + sum;
+			}
 
-			});
+
 			if (typeSeptTwo) {
 				sum += 1000;
 			}
 		} else {
 			sum = 15000;
-			select.forEach((elem, index) => {
-				if (index === 0 && 2 === parseFloat(elem.value)) {
-					console.log('sum: ', sum);
-					sum = ((sum / 100) * 20) + sum;
-					sum = Math.floor(sum);
-					console.log('sum: ', sum);
-				}
-				if (index === 1 && 2 === parseFloat(elem.value)) {
-					sum = ((sum / 100) * 30) + sum;
-				} else if (index === 1 && 3 === parseFloat(elem.value)) {
-					sum = ((sum / 100) * 50) + sum;
-				}
-				if (index === 2 && 2 === parseFloat(elem.value)) {
-					console.log('sum: ', sum);
-					sum = ((sum / 100) * 20) + sum;
-					sum = Math.floor(sum);
-					console.log('sum: ', sum);
-				}
-				if (index === 3 && 2 === parseFloat(elem.value)) {
-					sum = ((sum / 100) * 30) + sum;
-				} else if (index === 3 && 3 === parseFloat(elem.value)) {
-					sum = ((sum / 100) * 50) + sum;
-				}
-			});
+			if (parseFloat(select[0].value) === 2) {
+				sum = ((sum / 100) * 20) + sum;
+				sum = Math.floor(sum);
+			}
+			if (parseFloat(select[1].value) === 2) {
+				sum = ((sum / 100) * 30) + sum;
+			} else if (parseFloat(select[1].value) === 3) {
+				sum = ((sum / 100) * 50) + sum;
+			}
+			if (parseFloat(select[2].value) === 2) {
+				sum = ((sum / 100) * 20) + sum;
+				sum = Math.floor(sum);
+			}
+			if (parseFloat(select[3].value) === 2) {
+				sum = ((sum / 100) * 30) + sum;
+			} else if (parseFloat(select[3].value) === 3) {
+				sum = ((sum / 100) * 50) + sum;
+			}
+
 			if (typeSeptTwo) {
 				sum += 2000;
 			}
@@ -108,12 +101,21 @@ const constructor = () => {
 		}
 		const get = target.closest('.panel-heading'); // панель верняя
 		const btn = target.closest('.construct-btn'); // ктопка
-		const check = target.closest('#myonoffswitch');
-		const checkTwo = target.closest('#myonoffswitch-two'); // колодцы
+		const check = document.querySelector('#myonoffswitch');
+
+		const checkTwo = target.closest('#myonoffswitch-two');
 		const callBtn = target.closest('.call-btn');
+
 
 		//class="button construct-btn"
 		if (get !== null) { //
+			if (check.checked) {
+				typeSept = true;
+				blocNon();
+			} else {
+				typeSept = false;
+				blocIn();
+			}
 			panel.forEach((elem, index) => {
 				if (elem === get) {
 					toglgleTabs(index);
@@ -121,6 +123,14 @@ const constructor = () => {
 			});
 		}
 		if (btn !== null) {
+			if (check.checked) {
+				typeSept = true;
+				blocNon();
+			} else {
+				typeSept = false;
+				blocIn();
+			}
+
 			calck();
 			ntbb.forEach((elem, index) => {
 				if (elem === btn) {
@@ -132,17 +142,6 @@ const constructor = () => {
 			});
 		}
 
-		if (check !== null) {
-			if (check.checked) {
-				console.log('check.checked: ', check.checked);
-				typeSept = true;
-				blocNon();
-			} else {
-				console.log('check.checked: ', check.checked);
-				typeSept = false;
-				blocIn();
-			}
-		}
 
 		if (checkTwo !== null) {
 			if (checkTwo.checked) {
@@ -154,6 +153,7 @@ const constructor = () => {
 			}
 		}
 		if (callBtn !== null) {
+
 			setTimeout(popupDiscount.classList.add('active'), 3000);
 		}
 	});
