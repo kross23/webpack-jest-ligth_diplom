@@ -45,6 +45,7 @@ const sendForm = () => {
 				message.value = message.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
 			}
 		});
+
 		item.addEventListener('submit', event => {
 			event.preventDefault();
 			statusMesage.textContent = loadMesage;
@@ -70,3 +71,4 @@ const sendForm = () => {
 
 };
 export default sendForm;
+//                                                #calc-result      .popup-consultation

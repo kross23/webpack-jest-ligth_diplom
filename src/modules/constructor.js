@@ -5,8 +5,6 @@ const constructor = () => {
 		panelCollapse = consTructor.querySelectorAll('.panel-collapse'),
 		popupDiscount = document.querySelector('.popup-discount');
 
-
-
 	const collapseTwoid = document.querySelector('#collapseTwo'),
 		blockCollapse = collapseTwoid.querySelectorAll('.title-text'),
 		seleckColl = collapseTwoid.querySelectorAll('.select-box'),
@@ -101,16 +99,13 @@ const constructor = () => {
 				panelCollapse[i].classList.remove('in');
 			}
 		}
-
 	};
 	blocNon();
 	consTructor.addEventListener('click', event => {
 		const target = event.target;
-
 		if (!target.closest('.onoffswitch')) {
 			event.preventDefault();
 		}
-
 		const get = target.closest('.panel-heading'); // панель верняя
 		const btn = target.closest('.construct-btn'); // ктопка
 		const check = target.closest('#myonoffswitch');
@@ -126,8 +121,8 @@ const constructor = () => {
 			});
 		}
 		if (btn !== null) {
+			calck();
 			ntbb.forEach((elem, index) => {
-
 				if (elem === btn) {
 					if (index !== panelCollapse.length - 1) {
 						panelCollapse[index + 1].classList.add('in');
@@ -159,7 +154,6 @@ const constructor = () => {
 			}
 		}
 		if (callBtn !== null) {
-			calck();
 			setTimeout(popupDiscount.classList.add('active'), 3000);
 		}
 	});
