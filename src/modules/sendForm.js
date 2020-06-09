@@ -33,46 +33,20 @@ const sendForm = () => {
 		},
 		body: JSON.stringify(body),
 	});
-
 	const clear = () => {
 		// eslint-disable-next-line no-unused-vars
-		const allInput = document.querySelectorAll('input').forEach(el => el.value = '');
+	const  allInput = document.querySelectorAll('input[class="phone-user"]').forEach(el => el.value = ''),
+			 alInput = document.querySelectorAll('input[name = "user_name"]').forEach(el => el.value = ''),
+			 Input = document.querySelectorAll('input[name="user_quest"]').forEach(el => el.value = '');
 		const pop = document.querySelectorAll('.popup');
 		pop.forEach(elem => {
 			if (elem.classList.contains('active')) {
 				elem.classList.remove('active');
 			}
 		});
-
 		statusMesage.textContent = empty;
 	};
-
 	forms.forEach((item, index) => {
-		item.addEventListener('input', event => {
-			if (item.classList.contains('active')) {
-				const phone = item.querySelector('input[name = "phone-user"]'),
-					name = item.querySelector('input[name = "user_name"]'),
-					userq = item.querySelector('input[name="user_quest"]');
-
-				if (event.target === name) {
-					name.value = name.value.replace(/([^А-Яа-яЁё])*/g, '');
-				}
-				if (event.target === phone) {
-					phone.value = phone.value.replace(/[^\D]*/g, '');
-
-				}
-
-				if (event.target === userq) {
-					userq.value = userq.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
-
-				}
-				
-
-			}
-
-		});
-
-
 		item.addEventListener('submit', event => {
 			event.preventDefault();
 			if (index !== 2 && index !== 4 && index !== 6) {
@@ -109,7 +83,7 @@ const sendForm = () => {
 					dataSept.firstWell.rings = select[1].value;
 					dataSept.underside = myonoffswitchTwo.checked; //днище
 					dataSept.distanc = input.value,
-						dataSept.summa = calcResult.value;
+					dataSept.summa = calcResult.value;
 
 				} else {
 					dataSept.septicType = 2;
@@ -120,10 +94,8 @@ const sendForm = () => {
 					dataSept.secondWellDrainage.rings = select[3].value;
 					dataSept.underside = myonoffswitchTwo.checked; //днище
 					dataSept.distanc = input.value,
-						dataSept.summa = calcResult.value;
+					dataSept.summa = calcResult.value;
 				}
-
-
 				statusMesage.textContent = loadMesage;
 				item.appendChild(statusMesage);
 				const formData = new FormData(item);
@@ -144,10 +116,6 @@ const sendForm = () => {
 						statusMesage.textContent = errorMesage;
 						console.error(error);
 					});
-
-
-
-
 			} else if (index === 6) {
 
 				statusMesage.textContent = loadMesage;
@@ -173,8 +141,6 @@ const sendForm = () => {
 						console.error(error);
 					});
 			}
-
-
 		});
 	});
 

@@ -109,7 +109,6 @@ const constructor = () => {
 
 		//class="button construct-btn"
 		if (checked !== null || select !== null) {
-			console.log('target checced ', target);
 			calck();
 		}
 
@@ -118,9 +117,11 @@ const constructor = () => {
 			if (check.checked) {
 				typeSept = true;
 				blocNon();
+				calck();
 			} else {
 				typeSept = false;
 				blocIn();
+				calck();
 			}
 			calck();
 			panel.forEach((elem, index) => {
@@ -133,11 +134,13 @@ const constructor = () => {
 			if (check.checked) {
 				typeSept = true;
 				blocNon();
+				calck();
 			} else {
 				typeSept = false;
 				blocIn();
+				calck();
 			}
-			calck();
+
 			ntbb.forEach((elem, index) => {
 				if (elem === btn) {
 					if (index !== panelCollapse.length - 1) {
@@ -148,11 +151,13 @@ const constructor = () => {
 			});
 		}
 		if (checkTwo !== null) {
-			calck();
+
 			if (checkTwo.checked) {
 				typeSeptTwo = true;
+				calck();
 			} else {
 				typeSeptTwo = false;
+				calck();
 			}
 		}
 

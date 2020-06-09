@@ -12,7 +12,6 @@ const bayn = () => {
 				panelCollapse[i].classList.remove('in');
 			}
 		}
-
 	};
 	accordionTwo.addEventListener('click', event => {
 		event.preventDefault();

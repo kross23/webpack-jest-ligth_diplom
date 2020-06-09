@@ -31,18 +31,20 @@ const popupCall = () => {
 		elem.addEventListener('click', event => {
 			const target = event.target;
 			if (target === elem) {
+				arrPopup[index].style.opacity = `0`;
 				arrPopup[index].classList.add('active');
-				// if (document.body.clientWidth > 768) {
-				// 	arrPopup[index].style.opacity = `0`;
-				// 	const arrpop = arrPopup[index];
-				// 	step(arrpop);
-				// } else {
-				// 	arrPopup[index].style.opacity = `1`;
-				// }
+				arrPopup[index].classList.add('transition');
+				if (document.body.clientWidth > 768) {
+					
+					arrPopup[index].style.opacity = `1`;
+					
+				} else {
+					arrPopup[index].style.opacity = `1`;
+				}
 			}
 		});
 	});
-	arrPopup.forEach((elem) => {
+	arrPopup.forEach(elem => {
 		elem.addEventListener('click', event => {
 			let target = event.target;
 			if (target.classList.contains('popup-close')) {

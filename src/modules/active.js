@@ -7,7 +7,11 @@ const active = () => {
         }
         .none{
         display: none ;
-        }`;
+        }
+        .transition{
+                transition: 0.3s;     
+        }
+        `;
 	document.head.appendChild(style);
 
 };
