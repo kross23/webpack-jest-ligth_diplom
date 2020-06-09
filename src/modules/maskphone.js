@@ -2,9 +2,10 @@ const maskphone = () => {
 	const phoneInput = document.querySelectorAll('.phone-user'),
 		nameUser = document.querySelectorAll('input[name="user_name"]'), //'.user_name'
 		qwestion = document.querySelector('input[name="user_quest"]');
-
+		const fourcoaps = document.querySelector('#collapseFour');
+		let inputLength = fourcoaps.querySelector('input');
 	function mask(event) {
-		event.keyCode && (keyCode = event.keyCode);
+		event.keyCode && (KeyboardEvent.code = event.keyCode);///KeyboardEvent.code
 		const pos = this.selectionStart;
 		if (pos < 3) event.preventDefault();
 		let matrix = "+7 (___) ___ ____",
@@ -20,11 +21,11 @@ const maskphone = () => {
 		let reg = matrix.substr(0, this.value.length).replace(/_+/g,
 			a => "\\d{1," + a.length + "}").replace(/[+()]/g, "\\$&");
 		reg = new RegExp("^" + reg + "$");
-		if (!reg.test(this.value) || this.value.length < 5 || keyCode > 47 && keyCode < 58) this.value = new_value;
+		if (!reg.test(this.value) || this.value.length < 5 || KeyboardEvent.code > 47 && KeyboardEvent.code < 58) this.value = new_value;
 		if (event.type === "blur" && this.value.length < 5) this.value = "";
 	}
 	phoneInput.forEach(item => {
-		item.addEventListener("input", mask, false);
+		item.addEventListener('input', mask, false);
 	});
 
 	nameUser.forEach(item => {
@@ -37,15 +38,11 @@ const maskphone = () => {
 	});
 
 	qwestion.addEventListener('input', event => {
-		const target = event.target;
-		target.value = target.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
+		qwestion.value = qwestion.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
+	});
+	inputLength.addEventListener('input', event => {
+		inputLength.value = inputLength.value.replace(/\D/g, '').substr(0, 3);
 	});
 
-
 };
-
 export default maskphone;
-// name.value = name.value.replace(/([^А-Яа-яЁё])*/g, '');
-// }
-// if (event.target === userq) {
-//     userq.value = userq.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
