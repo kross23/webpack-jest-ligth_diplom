@@ -29,6 +29,8 @@ const constructor = () => {
 		let check_uno = document.querySelector('#myonoffswitch');
 		let check_duo = document.querySelector('#myonoffswitch-two');
 		let selectio = document.querySelectorAll('select');
+		 const fourcollaps = document.querySelector('#collapseFour');
+		let inputLength = fourcollaps.querySelector('input');
 		check_uno = arrDefaultget[0];
 		check_duo = arrDefaultget[1];
 		selectio[0].value = arrDefaultget[2];
@@ -36,6 +38,7 @@ const constructor = () => {
 		selectio[2].value = arrDefaultget[4];
 		selectio[3].value = arrDefaultget[5];
 		calcResult.value = '';
+		inputLength.value = '';
 	};
 
 
@@ -46,10 +49,6 @@ const constructor = () => {
 	panelCollapse[0].classList.remove('in');
 
 	const calck = () => {
-		// console.log('sum = : ', sum); // стартовая сумма
-		// console.log(typeSept); // первый чек
-		// console.log(typeSeptTwo); // второй чек
-
 		if (typeSept) {
 			sum = 10000;
 			if (parseFloat(select[0].value) === 2) {
