@@ -10,10 +10,33 @@ const constructor = () => {
 		seleckColl = collapseTwoid.querySelectorAll('.select-box'),
 		select = collapseTwoid.querySelectorAll('select'),
 		calcResult = document.querySelector('#calc-result');
-	calcResult.value = '';
+
 	let typeSept = true,
 		typeSeptTwo = true,
 		sum = 0;
+	const check1 = document.querySelector('#myonoffswitch');
+	const check2 = document.querySelector('#myonoffswitch-two');
+
+	const arrDefaultget  = [
+		check1.checked,
+		check2.checked,
+		select[0].value,
+		select[1].value,
+		select[2].value,
+		select[3].value
+	];
+	const arrGet = () => {
+		check1 = arrDefaultget[0];
+		check2 = arrDefaultget[1];
+		select[0].value = arrDefaultget[2];
+		select[1].value = arrDefaultget[3];
+		select[2].value = arrDefaultget[4];
+		select[3].value = arrDefaultget[5];
+		calcResult.value = '';
+	};
+
+
+
 
 
 	//........................................................
@@ -101,19 +124,16 @@ const constructor = () => {
 		}
 		const get = target.closest('.panel-heading'); // панель верняя
 		const btn = target.closest('.construct-btn'); // ктопка
-		const check = document.querySelector('#myonoffswitch');
-		const checked = target.closest('.onoffswitch');
+		const check = target.closest('#myonoffswitch');
 		const checkTwo = target.closest('#myonoffswitch-two');
 		const callBtn = target.closest('.call-btn');
 		const select = target.closest('.form-control');
 
 		//class="button construct-btn"
-		if (checked !== null || select !== null) {
+		if (select !== null) {
 			calck();
 		}
-
-		if (get !== null) { //
-
+		if (check !== null) {
 			if (check.checked) {
 				typeSept = true;
 				blocNon();
@@ -123,6 +143,11 @@ const constructor = () => {
 				blocIn();
 				calck();
 			}
+
+		}
+
+		if (get !== null) { //
+
 			calck();
 			panel.forEach((elem, index) => {
 				if (elem === get) {
@@ -131,7 +156,7 @@ const constructor = () => {
 			});
 		}
 		if (btn !== null) {
-			if (check.checked) {
+			if (check1.checked) {
 				typeSept = true;
 				blocNon();
 				calck();
@@ -140,7 +165,7 @@ const constructor = () => {
 				blocIn();
 				calck();
 			}
-
+			calck();
 			ntbb.forEach((elem, index) => {
 				if (elem === btn) {
 					if (index !== panelCollapse.length - 1) {
@@ -163,6 +188,7 @@ const constructor = () => {
 
 		if (callBtn !== null) {
 			setTimeout(popupDiscount.classList.add('active'), 3000);
+			arrGet();
 		}
 	});
 	popupDiscount.addEventListener('click', event => {
