@@ -26,12 +26,15 @@ const constructor = () => {
 		select[3].value
 	];
 	const arrGet = () => {
-		check1 = arrDefaultget[0];
-		check2 = arrDefaultget[1];
-		select[0].value = arrDefaultget[2];
-		select[1].value = arrDefaultget[3];
-		select[2].value = arrDefaultget[4];
-		select[3].value = arrDefaultget[5];
+		let check_uno = document.querySelector('#myonoffswitch');
+		let check_duo = document.querySelector('#myonoffswitch-two');
+		let selectio = document.querySelectorAll('select');
+		check_uno = arrDefaultget[0];
+		check_duo = arrDefaultget[1];
+		selectio[0].value = arrDefaultget[2];
+		selectio[1].value = arrDefaultget[3];
+		selectio[2].value = arrDefaultget[4];
+		selectio[3].value = arrDefaultget[5];
 		calcResult.value = '';
 	};
 

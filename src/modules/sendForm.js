@@ -102,7 +102,6 @@ const sendForm = () => {
 				const body = {};
 				formData.forEach((val, key) => body[key] = val);
 				body.calcdata = dataSept;
-				console.log(body);
 				postData(body)
 					.then(response => {
 						if (response.status !== 200) {
@@ -124,9 +123,7 @@ const sendForm = () => {
 				const body = {};
 				formData.forEach((val, key) => body[key] = val);
 				userQuest.quest = users.value;
-				console.log('userQuest: ', userQuest);
 				body.qwest = userQuest;
-				console.log('body: ', body);
 				postData(body)
 					.then(response => {
 						if (response.status !== 200) {
