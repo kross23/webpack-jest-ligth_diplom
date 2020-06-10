@@ -35,9 +35,9 @@ const sendForm = () => {
 	});
 	const clear = () => {
 		// eslint-disable-next-line no-unused-vars
-	const  allInput = document.querySelectorAll('input[class="phone-user"]').forEach(el => el.value = ''),
-			 alInput = document.querySelectorAll('input[name = "user_name"]').forEach(el => el.value = ''),
-			 Input = document.querySelectorAll('input[name="user_quest"]').forEach(el => el.value = '');
+		const allInput = document.querySelectorAll('input[class="phone-user"]').forEach(el => el.value = ''),
+			alInput = document.querySelectorAll('input[name = "user_name"]').forEach(el => el.value = ''),
+			Input = document.querySelectorAll('input[name="user_quest"]').forEach(el => el.value = '');
 		const pop = document.querySelectorAll('.popup');
 		pop.forEach(elem => {
 			if (elem.classList.contains('active')) {
@@ -46,8 +46,73 @@ const sendForm = () => {
 		});
 		statusMesage.textContent = empty;
 	};
+
+	function mask(event) {
+
+		event.keyCode && (KeyboardEvent.code = event.keyCode); ///KeyboardEvent.cod
+		const pos = this.selectionStart;
+		if (pos < 3) event.preventDefault();
+		let matrix = "+7 (___) ___ ____",
+			i = 0,
+			def = matrix.replace(/\D/g, ""),
+			val = this.value.replace(/\D/g, ""),
+			new_value = matrix.replace(/[_\d]/g, a => (i < val.length ? val.charAt(i++) || def.charAt(i) : a));
+		i = new_value.indexOf("_");
+		if (i !== -1) {
+			i < 5 && (i = 3);
+			new_value = new_value.slice(0, i);
+		}
+		let reg = matrix.substr(0, this.value.length).replace(/_+/g,
+			a => "\\d{1," + a.length + "}").replace(/[+()]/g, "\\$&");
+		reg = new RegExp("^" + reg + "$");
+		if (!reg.test(this.value) || this.value.length < 5 || KeyboardEvent.code > 47 && KeyboardEvent.code < 58) this.value = new_value;
+		if (event.type === "blur" && this.value.length < 5) this.value = "";
+	}
+
+
+
 	forms.forEach((item, index) => {
+
+
+		item.addEventListener('input', event => {
+			const onBtn = Btn => {
+				Btn.removeAttribute('disabled');
+			};
+			const offBtn = Btn => {
+				Btn.setAttribute('disabled', true);
+			};
+
+			const phoneInput = item.querySelector('input[name="user_phone"]');
+			const nameUser = item.querySelector('input[name="user_name"]');
+			
+			const formBtn = item.querySelector('.capture-form-btn');
+			const bound = mask.bind(phoneInput);
+
+			console.log('nameUser: ', item);
+			
+			if (phoneInput.hasAttribute('required')) {
+				phoneInput.removeAttribute('required');
+			}
+			if (nameUser.hasAttribute('required')) {
+				nameUser.removeAttribute('required');
+			}
+			if (event.target === phoneInput) {
+				bound(event);
+			}
+		
+			if(phoneInput.value !== ''){
+				onBtn(formBtn);
+			}else{
+				offBtn(formBtn);
+			}
+
+
+		});
+
+
+
 		item.addEventListener('submit', event => {
+
 			event.preventDefault();
 			if (index !== 2 && index !== 4 && index !== 6) {
 				statusMesage.textContent = loadMesage;

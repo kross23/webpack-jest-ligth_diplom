@@ -3,9 +3,8 @@ const constructor = () => {
 		panel = consTructor.querySelectorAll('.panel-heading'),
 		ntbb = consTructor.querySelectorAll('.construct-btn'),
 		panelCollapse = consTructor.querySelectorAll('.panel-collapse'),
-		popupDiscount = document.querySelector('.popup-discount');
-
-	const collapseTwoid = document.querySelector('#collapseTwo'),
+		popupDiscount = document.querySelector('.popup-discount'),
+		collapseTwoid = document.querySelector('#collapseTwo'),
 		blockCollapse = collapseTwoid.querySelectorAll('.title-text'),
 		seleckColl = collapseTwoid.querySelectorAll('.select-box'),
 		select = collapseTwoid.querySelectorAll('select'),
@@ -17,7 +16,7 @@ const constructor = () => {
 	const check1 = document.querySelector('#myonoffswitch');
 	const check2 = document.querySelector('#myonoffswitch-two');
 
-	const arrDefaultget  = [
+	const arrDefaultget = [
 		check1.checked,
 		check2.checked,
 		select[0].value,
@@ -28,71 +27,38 @@ const constructor = () => {
 	const arrGet = () => {
 		let check_uno = document.querySelector('#myonoffswitch');
 		let check_duo = document.querySelector('#myonoffswitch-two');
-		let selectio = document.querySelectorAll('select');
-		 const fourcollaps = document.querySelector('#collapseFour');
-		let inputLength = fourcollaps.querySelector('input');
+		const selectio = document.querySelectorAll('select');
+		const fourcollaps = document.querySelector('#collapseFour');
+		const inputLength = fourcollaps.querySelector('input');
+		let rezult = document.querySelector('#calc-result');
+
 		check_uno = arrDefaultget[0];
 		check_duo = arrDefaultget[1];
 		selectio[0].value = arrDefaultget[2];
 		selectio[1].value = arrDefaultget[3];
 		selectio[2].value = arrDefaultget[4];
 		selectio[3].value = arrDefaultget[5];
-		calcResult.value = '';
 		inputLength.value = '';
+		sum = 0;
+		rezult.value = '';
 	};
-
-
-
-
+	let count = 0;
+	const nums = total => {
+		if (total !== '') {
+			calcResult.value = count;
+			count += 499;
+			if (count < total) {
+				requestAnimationFrame(() => nums(total));
+			} else {
+				calcResult.textContent = total;
+				count = 0;
+				return;
+			}
+		}
+	};
 
 	//........................................................
 	panelCollapse[0].classList.remove('in');
-
-	const calck = () => {
-		if (typeSept) {
-			sum = 10000;
-			if (parseFloat(select[0].value) === 2) {
-				sum = ((sum / 100) * 20) + sum;
-				sum = Math.floor(sum);
-			}
-			if (parseFloat(select[1].value) === 2) {
-				sum = ((sum / 100) * 30) + sum;
-			} else if (parseFloat(select[1].value) === 3) {
-				sum = ((sum / 100) * 50) + sum;
-			}
-
-
-			if (typeSeptTwo) {
-				sum += 1000;
-			}
-		} else {
-			sum = 15000;
-			if (parseFloat(select[0].value) === 2) {
-				sum = ((sum / 100) * 20) + sum;
-				sum = Math.floor(sum);
-			}
-			if (parseFloat(select[1].value) === 2) {
-				sum = ((sum / 100) * 30) + sum;
-			} else if (parseFloat(select[1].value) === 3) {
-				sum = ((sum / 100) * 50) + sum;
-			}
-			if (parseFloat(select[2].value) === 2) {
-				sum = ((sum / 100) * 20) + sum;
-				sum = Math.floor(sum);
-			}
-			if (parseFloat(select[3].value) === 2) {
-				sum = ((sum / 100) * 30) + sum;
-			} else if (parseFloat(select[3].value) === 3) {
-				sum = ((sum / 100) * 50) + sum;
-			}
-
-			if (typeSeptTwo) {
-				sum += 2000;
-			}
-		}
-		calcResult.value = sum; // итоговая сумма
-	};
-
 	const blocNon = () => { // невидно
 		seleckColl[2].classList.remove('select-box');
 		seleckColl[3].classList.remove('select-box');
@@ -108,6 +74,62 @@ const constructor = () => {
 		seleckColl[3].classList.remove('collapse');
 		blockCollapse[1].classList.remove('collapse');
 	};
+	const calck = () => {
+		if (check1.checked) {
+			typeSept = true;
+			blocNon();
+		} else {
+			typeSept = false;
+			blocIn();
+		}
+		if (check2.checked) {
+			typeSeptTwo = true;
+		} else {
+			typeSeptTwo = false;
+		}
+		if (typeSept) {
+			sum = 10000;
+			if (parseFloat(select[0].value) === 2) {
+				sum = ((sum / 100) * 20) + sum;
+				//sum = Math.floor(sum);
+			}
+			if (parseFloat(select[1].value) === 2) {
+				sum = ((sum / 100) * 30) + sum;
+			} else if (parseFloat(select[1].value) === 3) {
+				sum = ((sum / 100) * 50) + sum;
+			}
+			if (typeSeptTwo) {
+				sum += 1000;
+			}
+		} else {
+			sum = 15000;
+			if (parseFloat(select[0].value) === 2) {
+				sum = ((sum / 100) * 20) + sum;
+				//sum = Math.floor(sum);
+			}
+			if (parseFloat(select[1].value) === 2) {
+				sum = ((sum / 100) * 30) + sum;
+			} else if (parseFloat(select[1].value) === 3) {
+				sum = ((sum / 100) * 50) + sum;
+			}
+			if (parseFloat(select[2].value) === 2) {
+				sum = ((sum / 100) * 20) + sum;
+				//sum = Math.floor(sum);
+			}
+			if (parseFloat(select[3].value) === 2) {
+				sum = ((sum / 100) * 30) + sum;
+			} else if (parseFloat(select[3].value) === 3) {
+				sum = ((sum / 100) * 50) + sum;
+			}
+			if (typeSeptTwo) {
+				sum += 2000;
+			}
+		}
+		nums(sum);
+		//calcResult.value = sum; // итоговая сумма
+	};
+
+
 
 	const toglgleTabs = index => {
 		for (let i = 0; i < panelCollapse.length; i++) {
@@ -130,26 +152,9 @@ const constructor = () => {
 		const checkTwo = target.closest('#myonoffswitch-two');
 		const callBtn = target.closest('.call-btn');
 		const select = target.closest('.form-control');
-
+		
 		//class="button construct-btn"
-		if (select !== null) {
-			calck();
-		}
-		if (check !== null) {
-			if (check.checked) {
-				typeSept = true;
-				blocNon();
-				calck();
-			} else {
-				typeSept = false;
-				blocIn();
-				calck();
-			}
-
-		}
-
 		if (get !== null) { //
-
 			calck();
 			panel.forEach((elem, index) => {
 				if (elem === get) {
@@ -158,15 +163,6 @@ const constructor = () => {
 			});
 		}
 		if (btn !== null) {
-			if (check1.checked) {
-				typeSept = true;
-				blocNon();
-				calck();
-			} else {
-				typeSept = false;
-				blocIn();
-				calck();
-			}
 			calck();
 			ntbb.forEach((elem, index) => {
 				if (elem === btn) {
@@ -177,32 +173,16 @@ const constructor = () => {
 				}
 			});
 		}
-		if (checkTwo !== null) {
-
-			if (checkTwo.checked) {
-				typeSeptTwo = true;
-				calck();
-			} else {
-				typeSeptTwo = false;
-				calck();
-			}
+		if (checkTwo !== null || check !== null || select !== null) {
+			calck();
 		}
-
 		if (callBtn !== null) {
-			setTimeout(popupDiscount.classList.add('active'), 3000);
-			arrGet();
+			calck();
+			popupDiscount.classList.add('active');
+			setTimeout(arrGet, 5000);
+
 		}
 	});
-	popupDiscount.addEventListener('click', event => {
-		let target = event.target;
-		if (target.classList.contains('popup-close')) {
-			popupDiscount.classList.remove('active');
-		} else {
-			target = target.closest('.popup-content');
-		}
-		if (!target) {
-			popupDiscount.classList.remove('active');
-		}
-	});
+
 };
 export default constructor;
