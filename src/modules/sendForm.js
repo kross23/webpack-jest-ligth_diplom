@@ -25,6 +25,12 @@ const sendForm = () => {
 	const statusMesage = document.createElement('div');
 	statusMesage.style.cssText = `font-size:2rem; color: #85be32;`;
 	const forms = document.querySelectorAll('form');
+	const allinput = document.querySelectorAll('input');
+	// allinput.forEach(el => {
+	// 	if (el.hasAttribute('required')) {
+	// 		el.removeAttribute('required'); // удаляем встроеную проверку в html
+	// 	}
+	// });
 
 	const postData = body => fetch('./server.php', {
 		method: 'POST',
@@ -71,48 +77,29 @@ const sendForm = () => {
 
 
 
-	forms.forEach((item, index) => {
-
+	forms.forEach((item, index) => {   // перечисление всех ворм 
 
 		item.addEventListener('input', event => {
-			const onBtn = Btn => {
-				Btn.removeAttribute('disabled');
-			};
-			const offBtn = Btn => {
-				Btn.setAttribute('disabled', true);
-			};
-
-			const phoneInput = item.querySelector('input[name="user_phone"]');
-			const nameUser = item.querySelector('input[name="user_name"]');
 			
-			const formBtn = item.querySelector('.capture-form-btn');
-			const bound = mask.bind(phoneInput);
-
-			console.log('nameUser: ', item);
 			
-			if (phoneInput.hasAttribute('required')) {
-				phoneInput.removeAttribute('required');
-			}
-			if (nameUser.hasAttribute('required')) {
-				nameUser.removeAttribute('required');
-			}
+		const formBtn = item.querySelector('button');
+		const phoneInput = item.querySelector('input[name="user_phone"]'); //поле имя
+		const nameUser = item.querySelector('input[name="user_name"]'); //поле телефона
+
+		formBtn.setAttribute('disabled', !(phoneInput && phoneInput.value));
+
+
+			const bound = mask.bind(phoneInput); //бинд проверки на номер
 			if (event.target === phoneInput) {
 				bound(event);
 			}
-		
-			if(phoneInput.value !== ''){
-				onBtn(formBtn);
-			}else{
-				offBtn(formBtn);
+			if (event.target === nameUser) {
+				nameUser.value = nameUser.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
 			}
-
 
 		});
 
-
-
 		item.addEventListener('submit', event => {
-
 			event.preventDefault();
 			if (index !== 2 && index !== 4 && index !== 6) {
 				statusMesage.textContent = loadMesage;
