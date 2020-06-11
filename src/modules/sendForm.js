@@ -26,11 +26,15 @@ const sendForm = () => {
 	statusMesage.style.cssText = `font-size:2rem; color: #85be32;`;
 	const forms = document.querySelectorAll('form');
 	const allinput = document.querySelectorAll('input');
-	// allinput.forEach(el => {
-	// 	if (el.hasAttribute('required')) {
-	// 		el.removeAttribute('required'); // удаляем встроеную проверку в html
-	// 	}
-	// });
+	const FormBtn = document.querySelectorAll('button[name="submit"]');
+	FormBtn.forEach(elem => {
+		elem.setAttribute('disabled', true);
+	});
+	allinput.forEach(el => {
+		if (el.hasAttribute('required')) {
+			el.removeAttribute('required'); // удаляем встроеную проверку в html
+		}
+	});
 
 	const postData = body => fetch('./server.php', {
 		method: 'POST',
@@ -77,16 +81,14 @@ const sendForm = () => {
 
 
 
-	forms.forEach((item, index) => {   // перечисление всех ворм 
+	forms.forEach((item, index) => { // перечисление всех ворм 
 
 		item.addEventListener('input', event => {
+			const formBtn = item.querySelector('button[name="submit"]');
+			const phoneInput = item.querySelector('input[name="user_phone"]'); //поле имя
+			const nameUser = item.querySelector('input[name="user_name"]'); //поле телефона
 			
-			
-		const formBtn = item.querySelector('button');
-		const phoneInput = item.querySelector('input[name="user_phone"]'); //поле имя
-		const nameUser = item.querySelector('input[name="user_name"]'); //поле телефона
-
-		formBtn.setAttribute('disabled', !(phoneInput && phoneInput.value));
+			//formBtn.setAttribute('disabled', !(phoneInput && phoneInput.value));
 
 
 			const bound = mask.bind(phoneInput); //бинд проверки на номер
@@ -96,10 +98,16 @@ const sendForm = () => {
 			if (event.target === nameUser) {
 				nameUser.value = nameUser.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
 			}
+			if (nameUser.value && phoneInput.value) {
+				formBtn.removeAttribute('disabled');
+			}
+
 
 		});
 
 		item.addEventListener('submit', event => {
+			const Btn = item.querySelector('button[name="submit"]');
+			
 			event.preventDefault();
 			if (index !== 2 && index !== 4 && index !== 6) {
 				statusMesage.textContent = loadMesage;
@@ -135,7 +143,7 @@ const sendForm = () => {
 					dataSept.firstWell.rings = select[1].value;
 					dataSept.underside = myonoffswitchTwo.checked; //днище
 					dataSept.distanc = input.value,
-					dataSept.summa = calcResult.value;
+						dataSept.summa = calcResult.value;
 
 				} else {
 					dataSept.septicType = 2;
@@ -146,7 +154,7 @@ const sendForm = () => {
 					dataSept.secondWellDrainage.rings = select[3].value;
 					dataSept.underside = myonoffswitchTwo.checked; //днище
 					dataSept.distanc = input.value,
-					dataSept.summa = calcResult.value;
+						dataSept.summa = calcResult.value;
 				}
 				statusMesage.textContent = loadMesage;
 				item.appendChild(statusMesage);
@@ -190,6 +198,7 @@ const sendForm = () => {
 						console.error(error);
 					});
 			}
+			Btn.setAttribute('disabled', true);
 		});
 	});
 
