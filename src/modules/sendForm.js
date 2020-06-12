@@ -83,12 +83,31 @@ const sendForm = () => {
 
 	forms.forEach((item, index) => { // перечисление всех ворм 
 
+		const Btn = item.querySelector('button[name="submit"]');
+
+
+		// Btn.removeAttribute('disabled');
+
+		// Btn.setAttribute('disabled', true);
+
+
 		item.addEventListener('input', event => {
 			const formBtn = item.querySelector('button[name="submit"]');
+
 			const phoneInput = item.querySelector('input[name="user_phone"]'); //поле имя
 			const nameUser = item.querySelector('input[name="user_name"]'); //поле телефона
-			
-			//formBtn.setAttribute('disabled', !(phoneInput && phoneInput.value));
+			const userQuest = item.querySelector('input[name="user_quest"]'); //вопрос от пользователя
+			const inputs = [];
+			let count = 0;
+			if (phoneInput !== null) {
+				inputs.push(phoneInput);
+			}
+			if (nameUser !== null) {
+				inputs.push(nameUser);
+			}
+			if (userQuest !== null) {
+				inputs.push(userQuest);
+			}
 
 
 			const bound = mask.bind(phoneInput); //бинд проверки на номер
@@ -98,16 +117,20 @@ const sendForm = () => {
 			if (event.target === nameUser) {
 				nameUser.value = nameUser.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
 			}
-			if (nameUser.value && phoneInput.value) {
+			inputs.forEach((input) => {
+				if (input.value !== '') {
+					count++;
+				}
+			});
+			if (count === inputs.length) {
 				formBtn.removeAttribute('disabled');
+			} else {
+				formBtn.setAttribute('disabled', true);
 			}
-
-
 		});
 
+
 		item.addEventListener('submit', event => {
-			const Btn = item.querySelector('button[name="submit"]');
-			
 			event.preventDefault();
 			if (index !== 2 && index !== 4 && index !== 6) {
 				statusMesage.textContent = loadMesage;
