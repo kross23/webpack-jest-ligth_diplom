@@ -111,13 +111,17 @@ const sendForm = () => {
 
 
 			const bound = mask.bind(phoneInput); //бинд проверки на номер
-			if (event.target === phoneInput) {
+			if (event.target === phoneInput && phoneInput !== null) {
 				bound(event);
 			}
-			if (event.target === nameUser) {
+			if (event.target === nameUser && nameUser !== null) {
 				nameUser.value = nameUser.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
 			}
-			inputs.forEach((input) => {
+			if (event.target === userQuest && userQuest !== null) {
+				userQuest.value = userQuest.value.replace(/([^А-Яа-яЁё.,\-'"!\s])*/g, '');
+			}
+
+			inputs.forEach(input => {
 				if (input.value !== '') {
 					count++;
 				}
@@ -166,7 +170,7 @@ const sendForm = () => {
 					dataSept.firstWell.rings = select[1].value;
 					dataSept.underside = myonoffswitchTwo.checked; //днище
 					dataSept.distanc = input.value,
-						dataSept.summa = calcResult.value;
+					dataSept.summa = calcResult.value;
 
 				} else {
 					dataSept.septicType = 2;
@@ -177,7 +181,7 @@ const sendForm = () => {
 					dataSept.secondWellDrainage.rings = select[3].value;
 					dataSept.underside = myonoffswitchTwo.checked; //днище
 					dataSept.distanc = input.value,
-						dataSept.summa = calcResult.value;
+					dataSept.summa = calcResult.value;
 				}
 				statusMesage.textContent = loadMesage;
 				item.appendChild(statusMesage);
